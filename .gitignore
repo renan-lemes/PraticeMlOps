@@ -1,3 +1,5 @@
 .env
 MLFLOW_TRACKING_URI
 mlruns
+__pycache__
+.pytest_cache
