@@ -75,6 +75,10 @@ jobs:
           - name: Train Model
             run: |
               python train.py 
+            env:
+              MLFLOW_TRACKING_USERNAME: ${{ secrets.MLFLOW_TRACKING_USERNAME }}
+              MLFLOW_TRACKING_PASSWORD: ${{ secrets.MLFLOW_TRACKING_PASSWORD }}
+              MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
 
   build_image:
     runs-on: ubuntu-latest
