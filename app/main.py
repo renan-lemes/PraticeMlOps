@@ -3,7 +3,7 @@ import mlflow
 import numpy as np
 from pydantic import BaseModel
 from fastapi import FastAPI
-
+from dotenv import load_dotenv
 
 class FetalHealthData(BaseModel):
     accelerations: float
@@ -36,10 +36,16 @@ def load_model():
     Raises:
         None
     """
-    print("reading model...")
+    load_dotenv()   ## load env
+    print('load the env...')
     MLFLOW_TRACKING_URI = os.getenv('MLFLOW_TRACKING_URI')
     MLFLOW_TRACKING_USERNAME = os.getenv('MLFLOW_TRACKING_USERNAME')
     MLFLOW_TRACKING_PASSWORD = os.getenv('MLFLOW_TRACKING_PASSWORD')
+    
+    if MLFLOW_TRACKING_PASSWORD is None or MLFLOW_TRACKING_URI is None or MLFLOW_TRACKING_USERNAME is None:
+        raise ValueError("The variable not defined!")
+    
+    print("reading model...")
     os.environ["MLFLOW_TRACKING_USERNAME"] = MLFLOW_TRACKING_USERNAME
     os.environ["MLFLOW_TRACKING_PASSWORD"] = MLFLOW_TRACKING_PASSWORD
     print("setting mlflow...")

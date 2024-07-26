@@ -120,7 +120,15 @@ def config_mlflow():
     Returns:
         None
     """
+
     load_dotenv()
+
+    MLFLOW_TRACKING_USERNAME = os.getenv('MLFLOW_TRACKING_USERNAME')
+    MLFLOW_TRACKING_PASSWORD = os.getenv('MLFLOW_TRACKING_PASSWORD')
+    MLFLOW_TRACKING_URI = os.getenv('MLFLOW_TRACKING_URI')
+
+    if MLFLOW_TRACKING_USERNAME is None or MLFLOW_TRACKING_PASSWORD is None or MLFLOW_TRACKING_URI is None : 
+        raise ValueError("The variable not defined!")
 
     os.environ['MLFLOW_TRACKING_USERNAME'] =  os.getenv('MLFLOW_TRACKING_USERNAME')
     os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
